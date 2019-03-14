@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.test.ok.service.CrawlService;
+import com.test.ok.serviceImpl.todayHumorServiceImpl;
 import com.test.ok.util.CrData;
 import com.test.ok.util.MainAppTodayHumor;
 
@@ -24,6 +26,7 @@ import com.test.ok.util.MainAppTodayHumor;
  */
 @Controller
 public class HomeController {
+	private CrawlService crwal;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -35,12 +38,8 @@ public class HomeController {
 	public String home(Locale locale, Model model) throws IOException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
-		
-		
-		Document doc = MainAppTodayHumor.docAppend1to10(3);
-		List<CrData> list = MainAppTodayHumor.getElement(doc);
-		
-		model.addAttribute("data", list);
+		crwal = new todayHumorServiceImpl(true);		
+		model.addAttribute("data", crwal.getElement(crwal.docAppend(3)));
 		
 		
 		return "home";

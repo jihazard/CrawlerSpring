@@ -38,9 +38,7 @@ public class MainAppTodayHumor {
 	 * @throws IOException
 	 */
 	public static Document docAppend1to10(int param) throws IOException {
-		// TODO Auto-generated method stub
 		Document doc = Jsoup.connect(URL+getParam(1)).get();
-		//System.out.println("" + doc.toString());
 		for (int i = 2; i <= param; i++) {
 		  Document doc2 = Jsoup.connect(URL+getParam(i)).get();
 		  doc2.appendTo(doc);
