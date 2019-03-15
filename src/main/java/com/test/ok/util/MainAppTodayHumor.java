@@ -69,7 +69,8 @@ public class MainAppTodayHumor {
 								 ,date.eq(i).text()
 								 ,hits.eq(i).text()
 								 ,ok.eq(i).text()
-								 ,no.eq(i).text());
+								 ,no.eq(i).text()
+								 ,"오늘의유머");
 			
 			list.add(crowl);
 			

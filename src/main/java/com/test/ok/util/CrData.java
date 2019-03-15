@@ -16,6 +16,7 @@ public class CrData {
 	private String hit;
 	private String ok;
 	private String no;
+	private String type;
 	
 	
 	
@@ -25,7 +26,7 @@ public class CrData {
 	}
 
 
-	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no) {
+	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no,String type) {
 		super();
 		this.subject = subject;
 		this.url = url;
@@ -34,9 +35,21 @@ public class CrData {
 		this.hit = hit;
 		this.ok = ok;
 		this.no= no;
+		this.type=type;
 	}
 	
 	
+	
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
 	public String getNo() {
 		return no;
 	}
@@ -86,7 +99,7 @@ public class CrData {
 	@Override
 	public String toString() {
 		return "CrData [subject=" + subject + ", url=" + url + ", name=" + name + ", date=" + date + ", hit=" + hit
-				+ ", ok=" + ok + "]";
+				+ ", ok=" + ok + ", no=" + no + "]";
 	}
 	
 	

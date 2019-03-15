@@ -10,10 +10,10 @@
 
 <style>
 .grid-item {
-	width: 400px;
-	height: 200px; border : 1px solid gray;
-	margin: 5, 5 auto;
-	border: 1px solid gray;
+  float: left;
+  width: 400px;
+  height: 260px;
+  border: 2px solid hsla(0, 0%, 0%, 0.5);
 }
 
 .grid-item--width2 {
@@ -35,8 +35,8 @@
 							// options
 							itemSelector : '.grid-item',
 							fitWidth : true,
-							columnWidth : 100
 						});
+						
 						var msnry = $grid.data('masonry');
 
 						$(document)
@@ -44,9 +44,8 @@
 										"click",
 										".grid-item",
 										function() {
-											var no = $(this).attr("data-num");
-											var url = "http://www.todayhumor.co.kr/board/view.php?table=bestofbest&no="
-													+ no
+											var no = $(this).attr("id");
+											var url = no;
 											window
 													.open(
 															url,
@@ -57,7 +56,7 @@
 
 						var page = 1;
 
-						$(window)
+			/* 			$(window)
 								.scroll(
 										function() {
 											if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
@@ -65,29 +64,22 @@
 												$("#map1")
 														.append("<div class='grid-item'>추가됨1</div>");
 											}
-										});
-						/* 	var data = JSON.parse(fn_getJsonData("/best"));
-						 $.each(data,function(k,v){
-						 console.log(k+"//"+v)
+										}); */
 						
-						 })  */
-
-						/* 	 	$.post("/best",function(data){
-						
-						 $.each(data, function(idx, itm) {
-						 if(idx==10) alert(idx+"/"+itm.subject+"/"+itm.name+"/"+itm.date)
+										var data = JSON.parse(fn_getJsonData("/best"));
+						 	
+			 			 $.each(data,function(k,v){
+						 
 						 var div = document.createElement('div');
-						 div.className = ".grid-item"
-						 div.id = "grid" + idx
+						 div.className = "grid-item"
+						 div.id = v.url
+						 div.innerHTML = "<span>"+v.subject+"</span><br><span>"+v.name+" "+v.date+"</span>"
+						
 						 document.getElementById("map1").appendChild(div);
-						
-						
-						
-
-						
-						 })
-						 })		 */
+						 
+						 }) 
 					})
+					
 
 	function fn_getJsonData(url) {
 		return $.ajax({
@@ -113,13 +105,13 @@
 	<h1>베오베</h1>
 
 	<div id="map1" class="grid">
-		<c:forEach var="data" items="${data}">
+<%-- 		<c:forEach var="data" items="${data}">
 			<div class="grid-item" data-num="${data.no}">
 				<span style="text-align: center;">${data.subject}</span><br /> <span>${data.name}</span>
 				<span>${data.date}</span>
 			</div>
 
-		</c:forEach>
+		</c:forEach>  --%>
 
 	</div>
 
