@@ -78,9 +78,8 @@ public class HomeController {
 		list2.add("웃대");
 		
 		for (String string : list2) {
-			crwal= map.get(string);
-			List<CrData>  dataList = crwal.getElement(crwal.docAppend(2));
-			list.addAll(dataList);
+			crwal = map.get(string);
+			list.addAll(crwal.getElement(crwal.docAppend(2)));
 		}
 		return list;
 	}

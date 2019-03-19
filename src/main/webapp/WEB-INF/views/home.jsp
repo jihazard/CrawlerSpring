@@ -102,7 +102,7 @@
 <title>Home</title>
 </head>
 <body>
-	<h1>베오베</h1>
+	<div id="header"><h1>베오베</h1></div>
 
 	<div id="map1" class="grid">
 <%-- 		<c:forEach var="data" items="${data}">
