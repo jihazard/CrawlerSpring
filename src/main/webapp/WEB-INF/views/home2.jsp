@@ -38,8 +38,7 @@
 <script
 	src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
-<!-- <link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css"
-	rel="stylesheet" />
+<!-- <link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css" rel="stylesheet" />
  -->	
 	
 <script>

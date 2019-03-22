@@ -37,12 +37,22 @@
 	$(document)
 			.ready(
 					function() {
+						
+						
+						
 						var $grid = $('.grid').masonry({
 							// options
 							itemSelector : '.grid-item',
 							fitWidth : true,
 						});
 						
+						
+						$("#checkAll").click(function() {
+							$("input[name=box]:checkbox").each(function() {
+								$(this).attr("checked", true);
+							});
+						});
+					
 						var msnry = $grid.data('masonry');
 
 						$(document)
@@ -81,7 +91,7 @@
 						 div.id = v.url
 						 div.innerHTML = "<span>"+v.subject+"</span><br><span>"+v.name+" "+v.date+"[" +v.type+"]</span>"
 						
-						 //document.getElementById("map1").appendChild(div);
+						 document.getElementById("map1").appendChild(div);
 						 
 						 }) 
 					})
@@ -134,9 +144,9 @@
 	
     <div class="container">
         <div class="hero-unit">
-        <h1>연습넷</h1>
-        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-        <p><a href="#" class="btn btn-primary btn-large">Learn more</a></p>
+        <h1>BMS</h1>
+        <p>자바 크롤링 연습사이트맨 </p>
+      
       </div>
     
     
@@ -144,27 +154,27 @@
 	
 	     <div class="row">
         <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details</a></p>
+          <h2>크롤링사이트</h2>  
+              <div>
+     				<input type="checkbox" class="checkbox" name="box" value="" />오늘의유머 <br>
+     				<input type="checkbox" class="checkbox" name="box" value=""/>웃대
+     				
+   			 </div>
+          <p> </p>
+          <p><a class="btn" href="#" id="checkAll">전체선택</a></p>
         </div>
         <div class="span8">
-          <h2>Heading</h2>
-          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-          <p><a class="btn" href="#">View details</a></p>
+          <h2>베스트</h2><br />
+            <p><a href="#" class="btn btn-primary btn-small">이전</a><a href="#" class="btn btn-primary btn-small">다음</a></p>
+          <div id="map1" class="grid">
        </div>
-        <div class="span4">
-          <h2>Heading</h2>
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-          <p><a class="btn" href="#">View details</a></p>
-        </div>
-      </div>
+        
 
-      <hr>
+    
 	
-	   <footer>
+<!-- 	   <footer>
         <p>&copy; 연습용</p>
-      </footer>
+      </footer> -->
 </div>
 </body>
 </html>
