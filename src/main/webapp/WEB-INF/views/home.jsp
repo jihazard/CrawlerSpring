@@ -16,7 +16,7 @@
       }
       
   html, body, pre, code, kbd, samp {
-          font-family: 'Press Start 2P', cursive,'둥근모꼴';
+          font-family: 'Press Start 2P','둥근모꼴';
       }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
