@@ -7,26 +7,32 @@
 
 <html>
 <head>
-
+<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet"> 
 <style>
-.grid-item {
-  float: left;
-  width: 400px;
-  height: 260px;
-  border: 2px solid hsla(0, 0%, 0%, 0.5);
-}
 
-.grid-item--width2 {
-	width: 200px;
-}
+  body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      
+  html, body, pre, code, kbd, samp {
+          font-family: 'Press Start 2P', cursive,'둥근모꼴';
+      }
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+<script src="/resources/bootstrap/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/resources/bootstrap/css/bootstrap.css" crossorigin="anonymous">
+<link rel="stylesheet" href="/resources/bootstrap/css/respon.css" crossorigin="anonymous">
+
+
 <script
 	src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-<script
-	src="https://unpkg.com/infinite-scroll@3/dist/infinite-scroll.pkgd.min.js"></script>
-<link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css"
+
+<!-- <link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css"
 	rel="stylesheet" />
+ -->	
+	
 <script>
 	$(document)
 			.ready(
@@ -75,7 +81,7 @@
 						 div.id = v.url
 						 div.innerHTML = "<span>"+v.subject+"</span><br><span>"+v.name+" "+v.date+"[" +v.type+"]</span>"
 						
-						 document.getElementById("map1").appendChild(div);
+						 //document.getElementById("map1").appendChild(div);
 						 
 						 }) 
 					})
@@ -102,18 +108,63 @@
 <title>Home</title>
 </head>
 <body>
-	<div id="header"><h1>베오베</h1></div>
 
-	<div id="map1" class="grid">
-<%-- 		<c:forEach var="data" items="${data}">
-			<div class="grid-item" data-num="${data.no}">
-				<span style="text-align: center;">${data.subject}</span><br /> <span>${data.name}</span>
-				<span>${data.date}</span>
-			</div>
 
-		</c:forEach>  --%>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar">1</span>
+            <span class="icon-bar">2</span>
+            <span class="icon-bar">3</span>
+          </button>
+          <a class="brand" href="#">bob</a>
+          <div class="nav-collapse collapse">
+            <ul class="nav">
+              <li class="active"><a href="#">Home</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="#contact">Contact</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
 
-	</div>
 
+	
+    <div class="container">
+        <div class="hero-unit">
+        <h1>연습넷</h1>
+        <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+        <p><a href="#" class="btn btn-primary btn-large">Learn more</a></p>
+      </div>
+    
+    
+	
+	
+	     <div class="row">
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details</a></p>
+        </div>
+        <div class="span8">
+          <h2>Heading</h2>
+          <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+          <p><a class="btn" href="#">View details</a></p>
+       </div>
+        <div class="span4">
+          <h2>Heading</h2>
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+          <p><a class="btn" href="#">View details</a></p>
+        </div>
+      </div>
+
+      <hr>
+	
+	   <footer>
+        <p>&copy; 연습용</p>
+      </footer>
+</div>
 </body>
 </html>

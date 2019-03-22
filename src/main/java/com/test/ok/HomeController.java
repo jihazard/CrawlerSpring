@@ -73,6 +73,8 @@ public class HomeController {
 		Map<String,CrawlService> map = new HashMap<>();
 		map.put("오늘의유머", new todayHumorServiceImpl(true) );
 		map.put("웃대", new HumorUniversityServiceImpl(true) );
+		
+		//구현전 테스트를 위해 만든 부분
 		List<String> list2 = new ArrayList<>();
 		list2.add("오늘의유머");
 		list2.add("웃대");

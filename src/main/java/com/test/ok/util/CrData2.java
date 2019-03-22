@@ -7,7 +7,7 @@ package com.test.ok.util;
  * @author ?ㅼ???
  *
  */
-public class CrData {
+public class CrData2 {
 	
 	private String subject;
 	private String url;
@@ -17,16 +17,16 @@ public class CrData {
 	private String ok;
 	private String no;
 	private String type;
-	 
 	
 	
 	
-	public CrData() {
+	
+	public CrData2() {
 		super();
 	}
 
 
-	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no,String type) {
+	public CrData2(String subject, String url, String name, String date, String hit, String ok ,String no,String type) {
 		super();
 		this.subject = subject;
 		this.url = url;
