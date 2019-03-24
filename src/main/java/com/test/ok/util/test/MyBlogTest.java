@@ -1,4 +1,4 @@
-package com.test.ok.util;
+package com.test.ok.util.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,27 +8,29 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class MainAppTodayHumor {
+import com.test.ok.crwal.vo.CrData;
 
-	private static String URL = "http://www.todayhumor.co.kr/board/list.php?table=bestofbest";
-/*	public static void main(String[] args) throws IOException {
+public class MyBlogTest {
+
+	private static String URL = "https://jihazarrd.tistory.com/";
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
-		String param = getParam(1);
-		System.out.println("가져온 유아엘 " + URL+param);
+		
+		//System.out.println("가져온 유아엘 " + URL);
 		
 		//1도큐먼트를 가져온다.
 		Document doc = docAppend1to10(3);
-		
-		List<CrData> list = getElement();
+		//System.out.println(" " + doc.toString());
+		List<CrData> list = getElement(doc);
 		
 		System.out.println("사이즈 : " + list.size());
-		int i=0;
+		
 		//배열에서 정보를 가져온다.
 		for (CrData crData : list) {
 			System.out.println(crData.toString());
 		}
 	}
-	*/
+	
 	
 
 	/**
@@ -38,11 +40,8 @@ public class MainAppTodayHumor {
 	 * @throws IOException
 	 */
 	public static Document docAppend1to10(int param) throws IOException {
-		Document doc = Jsoup.connect(URL+getParam(1)).get();
-		for (int i = 2; i <= param; i++) {
-		  Document doc2 = Jsoup.connect(URL+getParam(i)).get();
-		  doc2.appendTo(doc);
-		}
+		Document doc = Jsoup.connect(URL).get();
+		
 		return doc;
 	}
 
@@ -53,24 +52,17 @@ public class MainAppTodayHumor {
 	 */
 	public static List<CrData> getElement(Document doc) throws IOException {
 		
-		Elements subjects = doc.select(".subject");
-		Elements date = doc.select(".date");
-		Elements hits = doc.select(".hits");
-		Elements ok = doc.select(".oknok");
-		Elements name = doc.select(".name");
-		Elements no = doc.select(".no");
+		Elements subjects = doc.select(".post-item .title");
+		Elements date = doc.select(".post-item a");
+		
 		
 		List<CrData> list = new ArrayList<>();
-		for (int i = 0; i < ok.size(); i++) {
+		for (int i = 0; i < 5; i++) {
 			//String subject, String url, String name, String date, String hit, String ok
 			CrData crowl = new CrData(subjects.eq(i).text()
-								 ,date.eq(i).text()
-								 ,name.eq(i).text()
-								 ,date.eq(i).text()
-								 ,hits.eq(i).text()
-								 ,ok.eq(i).text()
-								 ,no.eq(i).text()
-								 ,"오늘의유머");
+								 ,URL+ date.eq(i).attr("href")
+								 ,"지하자드"
+								 ,"블로그");
 			
 			list.add(crowl);
 			

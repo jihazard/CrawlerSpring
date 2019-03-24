@@ -1,4 +1,4 @@
-package com.test.ok.serviceImpl;
+package com.test.ok.crwal.serviceImpl;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,8 +8,8 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-import com.test.ok.service.CrawlService;
-import com.test.ok.util.CrData;
+import com.test.ok.crwal.service.CrawlService;
+import com.test.ok.crwal.vo.CrData;
 
 public class todayHumorServiceImpl implements CrawlService {
 	private boolean isOn = true;
@@ -24,11 +24,11 @@ public class todayHumorServiceImpl implements CrawlService {
 
 	@Override
 	public Document docAppend(int callPageNum) throws IOException {
-		Document doc = Jsoup.connect(URL+getParam(1)).get();
-		for (int i = 2; i <= callPageNum; i++) {
+		Document doc = Jsoup.connect(getParam(callPageNum)).get();
+	/*	for (int i = 2; i <= callPageNum; i++) {
 		  Document doc2 = Jsoup.connect(URL+getParam(i)).get();
 		  doc2.appendTo(doc);
-		}
+		}*/
 		return doc;
 	}
 
@@ -47,10 +47,10 @@ public class todayHumorServiceImpl implements CrawlService {
 				CrData crowl = new CrData(subjects.eq(i).text()
 									 ,linkURL + no.eq(i).text()
 									 ,name.eq(i).text()
-									 ,date.eq(i).text()
+									 ,date.eq(i).text().replace("19/", "")
 									 ,hits.eq(i).text()
 									 ,ok.eq(i).text()
-									 ,no.eq(i).text(),"오늘의유머");
+									 ,no.eq(i).text(),"오유",i);
 				
 				list.add(crowl);
 				
@@ -62,7 +62,7 @@ public class todayHumorServiceImpl implements CrawlService {
 
 	@Override
 	public String getParam(int page) {
-		String param = "&page="+page; 
+		String param = URL+"&page="+page; 
 		return param;
 	}
 	

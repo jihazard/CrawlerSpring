@@ -1,31 +1,31 @@
 package com.test.ok;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
-import org.jsoup.nodes.Document;
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.test.ok.service.CrawlService;
-import com.test.ok.serviceImpl.HumorUniversityServiceImpl;
-import com.test.ok.serviceImpl.todayHumorServiceImpl;
-import com.test.ok.util.CrData;
-import com.test.ok.util.CrVO;
-import com.test.ok.util.MainAppTodayHumor;
+import com.test.ok.crwal.service.CrawlService;
+import com.test.ok.crwal.serviceImpl.HumorUniversityServiceImpl;
+import com.test.ok.crwal.serviceImpl.todayHumorServiceImpl;
+import com.test.ok.crwal.vo.CrData;
+import com.test.ok.index.serviceImpl.MyBlogServiceImpl;
+
 
 
 /**
@@ -44,22 +44,51 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws IOException {
 		logger.info("Welcome home! The client locale is {}.", locale);
+		crwal = new MyBlogServiceImpl();
+		List<CrData> list = crwal.getElement(crwal.docAppend(0));
+		System.out.println("받은 값 : " + list.size());
+		for (CrData crData : list) {
+			System.out.println(crData.toString());
+		}
+		model.addAttribute("list", list);
 		
-		return "home";
+		return "index.page";
 		
 		
 	}
-	
-	
+	  @RequestMapping("/test")
+	    public String testPage() {
+	        return "test.page";
+	    }
+	  @RequestMapping("/crwal")
+	    public String crwal() {
+	        return "home.page";
+	    }
 
 	@RequestMapping(value = "/best")
 	@ResponseBody
-	public List<CrData> best(@ModelAttribute CrVO vo ) throws IOException {
+	public List<CrData> best(@RequestParam(value="crwlList[]")List<String> value , HttpServletRequest request ) throws IOException {
 		logger.info("Welcome home! The client locale is {}.");
-		List<CrData> list = new ArrayList<>();
-		list = getList(list);
+		
+		 String page = request.getParameter("page");
+			 
+		return shuffle( getList(Integer.parseInt(page),value));
+	}
 
-		Collections.shuffle(list);    
+
+
+	private List<CrData> shuffle(List<CrData> list) {
+
+		Collections.sort(list, new Comparator<CrData>() {
+			@Override
+			public int compare(CrData o1, CrData o2) {
+				// TODO Auto-generated method stub
+				if(o1.getNum()> o2.getNum()) return 1;
+				else if(o1.getNum()< o2.getNum()) return -1;
+				else return 0;
+			}
+		});
+	
 		return list;
 	}
 
@@ -69,20 +98,19 @@ public class HomeController {
 	 * @param vo
 	 * @throws IOException 
 	 */
-	private List<CrData> getList(List<CrData> list) throws IOException {
+	private List<CrData> getList(int callPageNum, List<String> crwlList) throws IOException {
 		Map<String,CrawlService> map = new HashMap<>();
-		map.put("오늘의유머", new todayHumorServiceImpl(true) );
-		map.put("웃대", new HumorUniversityServiceImpl(true) );
+		map.put("todayHumor", new todayHumorServiceImpl(true) );
+		map.put("humorUniv", new HumorUniversityServiceImpl(true) );
 		
-		//구현전 테스트를 위해 만든 부분
-		List<String> list2 = new ArrayList<>();
-		list2.add("오늘의유머");
-		list2.add("웃대");
+		List<CrData> list = new ArrayList<>();
 		
-		for (String string : list2) {
-			crwal = map.get(string);
-			list.addAll(crwal.getElement(crwal.docAppend(2)));
+		for (String callPageName : crwlList) {
+			crwal = map.get(callPageName);
+			list.addAll(crwal.getElement(crwal.docAppend(callPageNum)));
 		}
 		return list;
 	}
+	
+	
 }

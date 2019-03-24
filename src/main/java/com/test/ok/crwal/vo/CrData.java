@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.test.ok.util;
+package com.test.ok.crwal.vo;
 
 /**
  * @author ?ㅼ???
  *
  */
-public class CrData2 {
+public class CrData {
 	
 	private String subject;
 	private String url;
@@ -17,16 +17,21 @@ public class CrData2 {
 	private String ok;
 	private String no;
 	private String type;
-	
-	
-	
-	
-	public CrData2() {
+	private int num;
+	 
+
+	public CrData() {
 		super();
 	}
+	public CrData(String subject, String url,String name , String type) {
+		super();
+		this.subject = subject;
+		this.url = url;
+		this.type=type;
+		this.name=name;
+	}
 
-
-	public CrData2(String subject, String url, String name, String date, String hit, String ok ,String no,String type) {
+	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no,String type) {
 		super();
 		this.subject = subject;
 		this.url = url;
@@ -38,8 +43,31 @@ public class CrData2 {
 		this.type=type;
 	}
 	
+	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no,String type, int num) {
+		super();
+		this.subject = subject;
+		this.url = url;
+		this.name = name;
+		this.date = date;
+		this.hit = hit;
+		this.ok = ok;
+		this.no= no;
+		this.type=type;
+		this.num= num;
+	}
 	
 	
+	
+	public int getNum() {
+		return num;
+	}
+
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+
 	public String getType() {
 		return type;
 	}

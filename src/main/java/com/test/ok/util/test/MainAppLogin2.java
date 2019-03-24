@@ -1,4 +1,4 @@
-package com.test.ok.util;
+package com.test.ok.util.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,11 +11,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class MainAppLogin {
-	private static String URL = "http://comic.kyungcl.synology.me/comic_list.php";
-	private static String URL_LOGIN = "http://comic.kyungcl.synology.me/proc/login_chk.php";
-	private static String login_id= "yjh";
-	private static String login_pw= "wlghks";
+public class MainAppLogin2 {
+	private static String URL = "https://magandacafe.com/bbs/board.php?bo_table=freeboard&wr_id=1464488";
+	private static String URL_LOGIN = "https://magandacafe.com/login_check.php";
+	private static String login_id= "javaland";
+	private static String login_pw= "wkqkfosem";
 	private static Map<String , String> cookie;
 	
 	public static void main(String[] args) throws IOException {

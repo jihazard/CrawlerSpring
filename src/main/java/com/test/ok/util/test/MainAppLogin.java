@@ -1,19 +1,44 @@
-package com.test.ok.util;
+package com.test.ok.util.test;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import org.jsoup.Connection.Method;
+import org.jsoup.Connection.Response;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
-public class MainAppHumor {
-
-	private static String URL = "http://web.humoruniv.com/board/humor/list.html?table=pds&st=day&";
-	private static String linkURL = "http://web.humoruniv.com/board/humor/read.html?table=pds&st=day&pg=0&number=";
+public class MainAppLogin {
+	private static String URL = "http://comic.kyungcl.synology.me/comic_list.php";
+	private static String URL_LOGIN = "http://comic.kyungcl.synology.me/proc/login_chk.php";
+	private static String login_id= "yjh";
+	private static String login_pw= "wlghks";
+	private static Map<String , String> cookie;
+	
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
+		
+		//1.로그인 
+		Response login = (Response) Jsoup.connect(URL_LOGIN)
+				.data("login_id", login_id)
+				.data("login_pw", login_pw)
+				.method(Method.POST)
+				.execute();
+		System.out.println("page Status CODE" +login.statusCode() +"//" + login.statusMessage());
+		Document doc = login.parse();
+		//System.out.println("" +doc.toString());
+		
+		cookie = login.cookies();
+		
+		Document doctt=Jsoup.connect(URL).cookies(cookie).get();
+		
+		System.out.println(""+doctt.toString());
+		
+		
+		/*
 		String param = getParam(1);
 		System.out.println("가져온 유아엘 " + URL+param);
 		
@@ -27,7 +52,7 @@ public class MainAppHumor {
 		//배열에서 정보를 가져온다.
 		for (CrData crData : list) {
 			System.out.println(crData.toString());
-		}
+		}*/
 	}
 	
 	
@@ -48,38 +73,6 @@ public class MainAppHumor {
 		return doc;
 	}
 
-
-	/**
-	 * @throws IOException 
-	 * 
-	 */
-	public static List<CrData> getElement(Document doc) throws IOException {
-		Elements no = doc.select("tr[id^=li_chk_pds-]");
-		Elements subjects = doc.select(".li_sbj");
-		Elements date = doc.select(".li_date");
-		Elements hits = doc.select(".li_und");
-		Elements ok = doc.select(".o");
-		Elements name = doc.select(".hu_nick_txt");
-		
-		
-		List<CrData> list = new ArrayList<>();
-		for (int i = 0; i < ok.size(); i++) {
-			//String subject, String url, String name, String date, String hit, String ok
-			CrData crowl = new CrData(subjects.eq(i).text()
-								 ,linkURL + no.eq(i).attr("id").replace("li_chk_pds-", "")
-								 ,name.eq(i).text()
-								 ,date.eq(i).text()
-								 ,hits.eq(i).text()
-								 ,ok.eq(i).text()
-								 ,no.eq(i).attr("id").replace("li_chk_pds-", "")
-								 ,"웃대");
-			
-			list.add(crowl);
-			
-		}
-		
-		return list;
-	}
 
 
 	/**

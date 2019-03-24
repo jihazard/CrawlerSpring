@@ -1,11 +1,11 @@
-package com.test.ok.service;
+package com.test.ok.crwal.service;
 
 import java.io.IOException;
 import java.util.List;
 
 import org.jsoup.nodes.Document;
 
-import com.test.ok.util.CrData;
+import com.test.ok.crwal.vo.CrData;
 
 public interface CrawlService {
 	

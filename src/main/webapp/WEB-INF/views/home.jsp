@@ -26,19 +26,15 @@
 <link rel="stylesheet" href="/resources/bootstrap/css/respon.css" crossorigin="anonymous">
 
 
-<script
-	src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+<script	src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 
-<!-- <link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css"
-	rel="stylesheet" />
- -->	
-	
 <script>
-	$(document)
-			.ready(
-					function() {
+	var page = 1;
+	$(document).ready(function() {
 						
 						
+						
+						showPageInfo()
 						
 						var $grid = $('.grid').masonry({
 							// options
@@ -47,18 +43,13 @@
 						});
 						
 						
-						$("#checkAll").click(function() {
-							$("input[name=box]:checkbox").each(function() {
-								$(this).attr("checked", true);
-							});
-						});
+					
 					
 						var msnry = $grid.data('masonry');
 
-						$(document)
-								.on(
+						$(document).on(
 										"click",
-										".grid-item",
+										".data_list",
 										function() {
 											var no = $(this).attr("id");
 											var url = no;
@@ -70,38 +61,42 @@
 															"toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
 										})
 
-						var page = 1;
+						fn_draw_page()
 
-			/* 			$(window)
-								.scroll(
-										function() {
-											if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-												alert("로딩중");
-												$("#map1")
-														.append("<div class='grid-item'>추가됨1</div>");
-											}
-										}); */
 						
-										var data = JSON.parse(fn_getJsonData("/best"));
-						 	
-			 			 $.each(data,function(k,v){
-						 
-						 var div = document.createElement('div');
-						 div.className = "grid-item"
-						 div.id = v.url
-						 div.innerHTML = "<span>"+v.subject+"</span><br><span>"+v.name+" "+v.date+"[" +v.type+"]</span>"
-						
-						 document.getElementById("map1").appendChild(div);
-						 
-						 }) 
 					})
 					
-
-	function fn_getJsonData(url) {
+	function fn_draw_page(){
+				var crwlList=[];
+				
+				$("input[name='box']:checked").each(function(i){
+						crwlList.push($(this).val());
+				})
+				
+			
+		
+			var param = {crwlList : crwlList,
+						 page : page} 
+			var data = JSON.parse(fn_getJsonData("/best",param));
+			 	
+				 $.each(data,function(k,v){
+			 
+			 var div = document.createElement('tr');
+			 div.className = "data_list"
+			 div.id = v.url
+			 div.innerHTML = "<td>"+v.subject+"</td><td>"+v.name+"</td><td> "+v.date+"<br>[" +v.type+"]</td>"
+			
+			 document.getElementById("tbody").appendChild(div);
+			 
+			 }) 
+		
+	}
+	function fn_getJsonData(url,param) {
 		return $.ajax({
 			url : url,
 			type : "POST",
 			async : false,
+			data:param,
 
 			success : function(data, textStatus, jqXHR) {
 				console.log(data);
@@ -113,6 +108,37 @@
 
 		}).responseText;
 	}
+	
+	function check_all() {
+		for(i=0; i < my_form.box.length; i++) {
+			my_form.box[i].checked = true;
+		}
+	}
+	
+	function prev(){
+		
+		if(page > 1){
+			removeDiv()
+			page--;
+			fn_draw_page()
+			showPageInfo()
+		}else alert("1페이지 입니다.")
+		
+	}
+	function next(){
+		removeDiv()
+		page++;
+		fn_draw_page()
+		showPageInfo()
+	}
+	
+	function removeDiv(){
+		 $("#tbody").empty();
+	}
+	
+	function showPageInfo(){
+		$("#pageinfo").text("< page : " + page + " >")
+	}
 </script>
 
 <title>Home</title>
@@ -120,31 +146,12 @@
 <body>
 
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="navbar-inner">
-        <div class="container">
-          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-            <span class="icon-bar">1</span>
-            <span class="icon-bar">2</span>
-            <span class="icon-bar">3</span>
-          </button>
-          <a class="brand" href="#">bob</a>
-          <div class="nav-collapse collapse">
-            <ul class="nav">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#contact">Contact</a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
-        </div>
-      </div>
-    </div>
 
 
 	
     <div class="container">
         <div class="hero-unit">
-        <h1>BMS</h1>
+        <h1>크롤링테스트넷</h1>
         <p>자바 크롤링 연습사이트맨 </p>
       
       </div>
@@ -156,17 +163,32 @@
         <div class="span4">
           <h2>크롤링사이트</h2>  
               <div>
-     				<input type="checkbox" class="checkbox" name="box" value="" />오늘의유머 <br>
-     				<input type="checkbox" class="checkbox" name="box" value=""/>웃대
-     				
+                <form name="my_form">
+     				<input type="checkbox" class="checkbox" name="box" value="todayHumor" checked="checked" />오늘의유머 <br>
+     				<input type="checkbox" class="checkbox" name="box" value="humorUniv" checked="checked"/>웃대
+     			</form>
    			 </div>
           <p> </p>
-          <p><a class="btn" href="#" id="checkAll">전체선택</a></p>
+          <p><a class="btn" href="#" id="checkAll" onclick='check_all();'">전체선택</a></p>
         </div>
         <div class="span8">
           <h2>베스트</h2><br />
-            <p><a href="#" class="btn btn-primary btn-small">이전</a><a href="#" class="btn btn-primary btn-small">다음</a></p>
-          <div id="map1" class="grid">
+            <p><a href="#" class="btn btn-primary btn-small" onclick='prev();'>이전</a><a href="#" class="btn btn-primary btn-small" onclick='next();'>다음</a> <span class="label label-success" id="pageinfo">1234</span></p>
+          <!-- <div id="map1" class="grid"> -->
+          
+          <table class="table table-hover">
+          	<colgroup>
+			<col width="60%" />
+			<col width="20%" />
+			<col width="20%" />
+			</colgroup>
+          	<thead><tr>
+          			  <th>제목</th><th>등록자</th><th>등록</th>
+          		  </tr></thead>
+          	<tbody id="tbody">
+          		
+          	</tbody>	  
+          </table>
        </div>
         
 

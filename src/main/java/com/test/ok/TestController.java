@@ -18,12 +18,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.test.ok.service.CrawlService;
-import com.test.ok.serviceImpl.HumorUniversityServiceImpl;
-import com.test.ok.serviceImpl.todayHumorServiceImpl;
-import com.test.ok.util.CrData;
-import com.test.ok.util.CrVO;
-import com.test.ok.util.MainAppTodayHumor;
+import com.test.ok.crwal.service.CrawlService;
+import com.test.ok.crwal.serviceImpl.HumorUniversityServiceImpl;
+import com.test.ok.crwal.serviceImpl.todayHumorServiceImpl;
+import com.test.ok.crwal.vo.CrData;
+import com.test.ok.crwal.vo.CrVO;
+import com.test.ok.util.test.MainAppTodayHumor;
 
 
 /**
