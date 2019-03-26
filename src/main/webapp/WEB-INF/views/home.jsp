@@ -31,31 +31,11 @@
 <script>
 	var page = 1;
 	$(document).ready(function() {
-						
-						
-						
 						showPageInfo()
-						
-						var $grid = $('.grid').masonry({
-							// options
-							itemSelector : '.grid-item',
-							fitWidth : true,
-						});
-						
-						
-					
-					
-						var msnry = $grid.data('masonry');
-
-						$(document).on(
-										"click",
-										".data_list",
-										function() {
+						$(document).on("click",".data_list",function() {
 											var no = $(this).attr("id");
 											var url = no;
-											window
-													.open(
-															url,
+											window.open(url,
 															"bob",
 															"_blank",
 															"toolbar=yes,scrollbars=yes,resizable=yes,top=500,left=500,width=400,height=400");
@@ -74,22 +54,23 @@
 				})
 				
 			
-		
-			var param = {crwlList : crwlList,
-						 page : page} 
-			var data = JSON.parse(fn_getJsonData("/best",param));
-			 	
-				 $.each(data,function(k,v){
-			 
-			 var div = document.createElement('tr');
-			 div.className = "data_list"
-			 div.id = v.url
-			 div.innerHTML = "<td>"+v.subject+"</td><td>"+v.name+"</td><td> "+v.date+"<br>[" +v.type+"]</td>"
-			
-			 document.getElementById("tbody").appendChild(div);
-			 
-			 }) 
-		
+			if(crwlList.length==0) alert("크롤링할 사이트가 선택되지 않았슴돠")
+			else{
+				var param = {crwlList : crwlList,
+							 page : page} 
+				var data = JSON.parse(fn_getJsonData("/best",param));
+				 	
+					 $.each(data,function(k,v){
+				 
+				 var div = document.createElement('tr');
+				 div.className = "data_list"
+				 div.id = v.url
+				 div.innerHTML = "<td>"+v.subject+"</td><td>"+v.name+"</td><td> "+v.date+"<br>[" +v.type+"]</td>"
+				
+				 document.getElementById("tbody").appendChild(div);
+					 
+				 }) 
+				}
 	}
 	function fn_getJsonData(url,param) {
 		return $.ajax({
@@ -152,7 +133,7 @@
     <div class="container">
         <div class="hero-unit">
         <h1>크롤링테스트넷</h1>
-        <p>자바 크롤링 연습사이트맨 </p>
+        <p>자바 크롤링 연습사이트맨  <br>오로지 JSOUP만을 이용함 </p>
       
       </div>
     
