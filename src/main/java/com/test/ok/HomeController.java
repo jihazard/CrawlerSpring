@@ -96,11 +96,11 @@ public class HomeController {
 	 * @throws IOException 
 	 */
 	private List<CrData> getList(int callPageNum, List<String> crwlList) throws IOException {
-		Map<String,CrawlService> map = new HashMap<String,CrawlService	>();
+		Map<String,CrawlService> map = new HashMap<String,CrawlService>();
 		map.put("todayHumor", new todayHumorServiceImpl(true) );
 		map.put("humorUniv", new HumorUniversityServiceImpl(true) );
 		
-		List<CrData> list = new ArrayList<>();
+		List<CrData> list = new ArrayList<CrData>();
 		
 		for (String callPageName : crwlList) {
 			crwal = map.get(callPageName);
