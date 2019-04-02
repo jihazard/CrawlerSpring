@@ -46,13 +46,10 @@ public class HomeController {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		crwal = new MyBlogServiceImpl();
 		List<CrData> list = crwal.getElement(crwal.docAppend(0));
-		System.out.println("받은 값 : " + list.size());
-		for (CrData crData : list) {
-			System.out.println(crData.toString());
-		}
+	
 		model.addAttribute("list", list);
 		
-		return "index.page";
+		return "main.page";
 		
 		
 	}
@@ -99,7 +96,7 @@ public class HomeController {
 	 * @throws IOException 
 	 */
 	private List<CrData> getList(int callPageNum, List<String> crwlList) throws IOException {
-		Map<String,CrawlService> map = new HashMap<>();
+		Map<String,CrawlService> map = new HashMap<String,CrawlService	>();
 		map.put("todayHumor", new todayHumorServiceImpl(true) );
 		map.put("humorUniv", new HumorUniversityServiceImpl(true) );
 		

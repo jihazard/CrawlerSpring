@@ -41,7 +41,7 @@ public class todayHumorServiceImpl implements CrawlService {
 		Elements name = doc.select(".name");
 		Elements no = doc.select(".no");
 		
-		List<CrData> list = new ArrayList<>();
+		List<CrData> list = new ArrayList<CrData>();
 		if(isOn){
 			for (int i = 0; i < ok.size(); i++) {
 				CrData crowl = new CrData(subjects.eq(i).text()

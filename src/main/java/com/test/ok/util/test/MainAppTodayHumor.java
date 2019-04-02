@@ -62,7 +62,7 @@ public class MainAppTodayHumor {
 		Elements name = doc.select(".name");
 		Elements no = doc.select(".no");
 		
-		List<CrData> list = new ArrayList<>();
+		List<CrData> list = new ArrayList<CrData>();
 		for (int i = 0; i < ok.size(); i++) {
 			//String subject, String url, String name, String date, String hit, String ok
 			CrData crowl = new CrData(subjects.eq(i).text()

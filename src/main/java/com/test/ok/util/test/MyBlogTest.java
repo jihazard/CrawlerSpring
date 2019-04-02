@@ -18,7 +18,7 @@ public class MyBlogTest {
 		
 		//System.out.println("가져온 유아엘 " + URL);
 		
-		//1도큐먼트를 가져온다.
+	/*	//1도큐먼트를 가져온다.
 		Document doc = docAppend1to10(3);
 		//System.out.println(" " + doc.toString());
 		List<CrData> list = getElement(doc);
@@ -28,7 +28,9 @@ public class MyBlogTest {
 		//배열에서 정보를 가져온다.
 		for (CrData crData : list) {
 			System.out.println(crData.toString());
-		}
+		}*/
+		
+		System.out.println("193001 ".substring(2,6));
 	}
 	
 	
@@ -56,7 +58,7 @@ public class MyBlogTest {
 		Elements date = doc.select(".post-item a");
 		
 		
-		List<CrData> list = new ArrayList<>();
+		List<CrData> list = new ArrayList<CrData>();
 		for (int i = 0; i < 5; i++) {
 			//String subject, String url, String name, String date, String hit, String ok
 			CrData crowl = new CrData(subjects.eq(i).text()
