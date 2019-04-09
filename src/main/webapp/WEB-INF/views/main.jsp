@@ -106,7 +106,7 @@
 </head>
 <body>
 		<div class="jumbotron">
-        <h1>테스트넷</h1>
+        <h1>테스트넷 v2</h1>
         <p class="lead">이것저것 테스트 하기 위해 만들어봄.</p>
         <a class="btn btn-large btn-success" href="#">Get started today</a>
       </div>
