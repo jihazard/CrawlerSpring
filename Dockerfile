@@ -1,3 +1,3 @@
 FROM tomcat:8
-
-COPY target/*.war /usr/local/tomcat/webapps/
+RUN rm -rf ./webapps/*
+COPY target/*.war /usr/local/tomcat/webapps/ROOT.war
