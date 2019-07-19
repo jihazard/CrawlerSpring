@@ -1,28 +1,43 @@
 /**
- * 
+ *
  */
 package com.test.ok.crwal.vo;
+
+import com.test.ok.crwal.vo.CrData.CrDataBuilder;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 /**
  * @author ?ㅼ???
  *
  */
+@Builder
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CrData {
-	
+
 	private String subject;
+	private String explain;
 	private String url;
 	private String name;
+	private String writer;
 	private String date;
 	private String hit;
 	private String ok;
 	private String no;
 	private String type;
+	private String img;
 	private int num;
-	 
 
-	public CrData() {
-		super();
-	}
+
+
 	public CrData(String subject, String url,String name , String type) {
 		super();
 		this.subject = subject;
@@ -32,7 +47,6 @@ public class CrData {
 	}
 
 	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no,String type) {
-		super();
 		this.subject = subject;
 		this.url = url;
 		this.name = name;
@@ -42,9 +56,8 @@ public class CrData {
 		this.no= no;
 		this.type=type;
 	}
-	
+
 	public CrData(String subject, String url, String name, String date, String hit, String ok ,String no,String type, int num) {
-		super();
 		this.subject = subject;
 		this.url = url;
 		this.name = name;
@@ -55,82 +68,28 @@ public class CrData {
 		this.type=type;
 		this.num= num;
 	}
-	
-	
-	
-	public int getNum() {
-		return num;
-	}
 
 
-	public void setNum(int num) {
-		this.num = num;
-	}
 
 
-	public String getType() {
-		return type;
-	}
 
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-
-	public String getNo() {
-		return no;
-	}
-
-
-	public void setNo(String no) {
-		this.no = no;
-	}
-
-
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	public String getUrl() {
-		return url;
-	}
-	public void setUrl(String url) {
-		this.url = url;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getDate() {
-		return date;
-	}
-	public void setDate(String date) {
-		this.date = date;
-	}
-	public String getHit() {
-		return hit;
-	}
-	public void setHit(String hit) {
-		this.hit = hit;
-	}
-	public String getOk() {
-		return ok;
-	}
-	public void setOk(String ok) {
-		this.ok = ok;
-	}
 	@Override
 	public String toString() {
 		return "CrData [subject=" + subject + ", url=" + url + ", name=" + name + ", date=" + date + ", hit=" + hit
 				+ ", ok=" + ok + ", no=" + no + "]";
 	}
-	
-	
-	
+	/**
+	 * @return
+	 */
+	public int getNum() {
+		// TODO Auto-generated method stub
+		return num;
+
+	}
+
+
+
+
+
 
 }

@@ -18,12 +18,12 @@ public class MainAppHumor {
 		// TODO Auto-generated method stub
 		String param = getParam(2);
 		System.out.println("가져온 유아엘 " + URL+param);
-		
+
 		//1도큐먼트를 가져온다.
 		Document doc = docAppend1to10(3);
 		System.out.println(" " + doc.toString());
 		List<CrData> list = getElement(doc);
-		
+
 		System.out.println("사이즈 : " + list.size());
 		int i=0;
 		//배열에서 정보를 가져온다.
@@ -31,11 +31,11 @@ public class MainAppHumor {
 			System.out.println(crData.toString());
 		}
 	}
-	
-	
+
+
 
 	/**
-	 *  
+	 *
 	 * @param param
 	 * @return
 	 * @throws IOException
@@ -52,8 +52,8 @@ public class MainAppHumor {
 
 
 	/**
-	 * @throws IOException 
-	 * 
+	 * @throws IOException
+	 *
 	 */
 	public static List<CrData> getElement(Document doc) throws IOException {
 		Elements no = doc.select("tr[id^=li_chk_pds-]");
@@ -62,8 +62,8 @@ public class MainAppHumor {
 		Elements hits = doc.select(".li_und");
 		Elements ok = doc.select(".o");
 		Elements name = doc.select(".hu_nick_txt");
-		
-		
+
+
 		List<CrData> list = new ArrayList<CrData>();
 		for (int i = 0; i < ok.size(); i++) {
 			//String subject, String url, String name, String date, String hit, String ok
@@ -75,11 +75,11 @@ public class MainAppHumor {
 								 ,ok.eq(i).text()
 								 ,no.eq(i).attr("id").replace("li_chk_pds-", "")
 								 ,"웃대");
-			
+
 			list.add(crowl);
-			
+
 		}
-		
+
 		return list;
 	}
 
@@ -91,8 +91,8 @@ public class MainAppHumor {
 	 * @return
 	 */
 	public static String getParam(int page){
-		String param = "pg="+page; 
-		
+		String param = "pg="+page;
+
 		return param;
 	}
 

@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.ok.crwal.service.CrawlService;
 import com.test.ok.crwal.serviceImpl.HumorUniversityServiceImpl;
+import com.test.ok.crwal.serviceImpl.WoowaServiceImpl;
 import com.test.ok.crwal.serviceImpl.todayHumorServiceImpl;
 import com.test.ok.crwal.vo.CrData;
 import com.test.ok.index.serviceImpl.MyBlogServiceImpl;
@@ -34,24 +35,25 @@ import com.test.ok.index.serviceImpl.MyBlogServiceImpl;
 @Controller
 public class HomeController {
 	private CrawlService crwal;
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
-	
+
 	/**
 	 * Simply selects the home view to render by returning its name.
-	 * @throws IOException 
+	 * @throws IOException
 	 */
 	@RequestMapping(value = "/main", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) throws IOException {
 		logger.info("Welcome home! The client locale is {}.", locale);
 		crwal = new MyBlogServiceImpl();
+
 		List<CrData> list = crwal.getElement(crwal.docAppend(0));
-	
+
 		model.addAttribute("list", list);
-		
+
 		return "main.page";
-		
-		
+
+
 	}
 	  @RequestMapping("/test")
 	    public String testPage() {
@@ -66,10 +68,11 @@ public class HomeController {
 	@ResponseBody
 	public List<CrData> best(@RequestParam(value="crwlList[]")List<String> value , HttpServletRequest request ) throws IOException {
 		logger.info("Welcome home! The client locale is {}.");
-		
+
 		 String page = request.getParameter("page");
-			 
-		return shuffle( getList(Integer.parseInt(page),value));
+		 if(page == null) page ="1";
+		 //shuffle( getList(Integer.parseInt(page),value));
+		return getList(Integer.parseInt(page),value);
 	}
 
 
@@ -85,29 +88,33 @@ public class HomeController {
 				else return 0;
 			}
 		});
-	
+
 		return list;
 	}
 
 
 
 	/**
-	 * @param vo
-	 * @throws IOException 
+	 * @param
+	 * @throws IOException
 	 */
 	private List<CrData> getList(int callPageNum, List<String> crwlList) throws IOException {
 		Map<String,CrawlService> map = new HashMap<String,CrawlService>();
-		map.put("todayHumor", new todayHumorServiceImpl(true) );
-		map.put("humorUniv", new HumorUniversityServiceImpl(true) );
-		
+		//map.put("todayHumor", new todayHumorServiceImpl(true) );
+		//map.put("humorUniv", new HumorUniversityServiceImpl(true) );
+		map.put("woow", new WoowaServiceImpl(true));
 		List<CrData> list = new ArrayList<CrData>();
-		
-		for (String callPageName : crwlList) {
-			crwal = map.get(callPageName);
-			list.addAll(crwal.getElement(crwal.docAppend(callPageNum)));
-		}
+
+//		for (String callPageName : crwlList) {
+//			crwal = map.get(callPageName);
+//			list.addAll(crwal.getElement(crwal.docAppend(callPageNum)));
+//		}
+		crwal = map.get("woow");
+		list.addAll(crwal.getElement(crwal.docAppend(1)));
+
+
 		return list;
 	}
-	
-	
+
+
 }
