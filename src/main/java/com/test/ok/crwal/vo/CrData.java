@@ -34,6 +34,7 @@ public class CrData {
 	private String no;
 	private String type;
 	private String img;
+	private int status;
 	private int num;
 
 

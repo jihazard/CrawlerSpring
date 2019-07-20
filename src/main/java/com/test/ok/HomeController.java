@@ -1,9 +1,12 @@
 package com.test.ok;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -22,10 +25,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.test.ok.crwal.service.CrawlService;
 import com.test.ok.crwal.serviceImpl.HumorUniversityServiceImpl;
+import com.test.ok.crwal.serviceImpl.LineEngineerServiceImpl;
 import com.test.ok.crwal.serviceImpl.WoowaServiceImpl;
 import com.test.ok.crwal.serviceImpl.todayHumorServiceImpl;
 import com.test.ok.crwal.vo.CrData;
 import com.test.ok.index.serviceImpl.MyBlogServiceImpl;
+import com.test.ok.util.test.LineEngineerAppTest;
 
 
 
@@ -82,10 +87,18 @@ public class HomeController {
 		Collections.sort(list, new Comparator<CrData>() {
 			@Override
 			public int compare(CrData o1, CrData o2) {
-				// TODO Auto-generated method stub
-				if(o1.getNum()> o2.getNum()) return 1;
-				else if(o1.getNum()< o2.getNum()) return -1;
-				else return 0;
+				try {
+					Date o1Date = new SimpleDateFormat("yyyy.MM.dd").parse(o1.getDate());
+					Date o2Date = new SimpleDateFormat("yyyy.MM.dd").parse(o2.getDate());
+					int result = o1Date.compareTo(o2Date);
+					if(result < 0 ) return 1;
+					else if(result > 0) return -1;
+					else return 0;
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				return 0;		
 			}
 		});
 
@@ -103,17 +116,18 @@ public class HomeController {
 		//map.put("todayHumor", new todayHumorServiceImpl(true) );
 		//map.put("humorUniv", new HumorUniversityServiceImpl(true) );
 		map.put("woow", new WoowaServiceImpl(true));
+		map.put("line", new LineEngineerServiceImpl(true));
 		List<CrData> list = new ArrayList<CrData>();
-
+		
 //		for (String callPageName : crwlList) {
 //			crwal = map.get(callPageName);
 //			list.addAll(crwal.getElement(crwal.docAppend(callPageNum)));
 //		}
 		crwal = map.get("woow");
 		list.addAll(crwal.getElement(crwal.docAppend(1)));
-
-
-		return list;
+		crwal = map.get("line");
+		list.addAll(crwal.getElement(crwal.docAppend(1)));
+		return shuffle(list);
 	}
 
 

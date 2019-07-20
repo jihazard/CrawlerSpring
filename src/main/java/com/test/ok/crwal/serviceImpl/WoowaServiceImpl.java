@@ -11,6 +11,8 @@ import org.jsoup.select.Elements;
 import com.test.ok.crwal.service.CrawlService;
 import com.test.ok.crwal.vo.CrData;
 
+import dateUtil.DateUtil;
+
 public class WoowaServiceImpl implements CrawlService {
 	private boolean isOn = true;
 	private static String URL = "http://woowabros.github.io";
@@ -46,18 +48,25 @@ public class WoowaServiceImpl implements CrawlService {
 		List<CrData> list = new ArrayList<CrData>();
 		if(isOn){
 			for (int i = 0; i < faceImg.size(); i++) {
-				String[] split = url.eq(i).attr("href").split("/");
+				try {
+					String[] split = url.eq(i).attr("href").split("/");
+					String date = split[2] +"."+split[3] +"." + split[4];
+					CrData crowl = CrData.builder()
+							.subject(subjects.eq(i).text())
+							.explain(subjectExplain.eq(i).text())
+							.writer(writer.eq(i).text().trim().split(",")[2])
+							.img(faceImg.get(i).attr("src"))
+							.url( URL + url.eq(i).attr("href"))
+							.type("우아한형제들")
+							.status(DateUtil.checkStatus(date))
+							.date(date).build();
+							
+							;
 
-				CrData crowl = CrData.builder()
-						.subject(subjects.eq(i).text())
-						.explain(subjectExplain.eq(i).text())
-						.writer(writer.eq(i).text().trim().split(",")[2])
-						.img(faceImg.get(i).attr("src"))
-						.url( URL + url.eq(i).attr("href"))
-						.date(split[2] +"/"+split[3] +"/" + split[4]).build();
-						;
-
-				list.add(crowl);
+					list.add(crowl);
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
 			}
 		}
 

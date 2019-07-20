@@ -25,6 +25,7 @@ tbody tr{
 .title{
 	font:bold;
 	font-size: 110%;
+	color: white;
 }
 
 .subTitle {
@@ -93,7 +94,10 @@ tbody tr{
 				var div = document.createElement('tr');
 				div.className = "data_list"
 				div.id = v.url
-				div.innerHTML = "<td><div><p class='title'>"+v.subject+"</p><span class='subTitle'>"
+				
+				var status = v.status=='1'? '<span class="badge badge-success">New</span>':'';
+				
+				div.innerHTML = "<td>"+status +"</td><td><div><p class='title'>"+v.subject+"</p><span class='subTitle'>"
 								+v.explain+"</span></div></td><td><div><span><img src="+v.img+"  class='faceImg'></span><span class='writer'>"+v.writer+"</span</div></td><td> " + v.date + "<br>[" + v.type + "]</td>"
 
 				document.getElementById("tbody").appendChild(div);
@@ -161,9 +165,9 @@ tbody tr{
 
 	<div class="container">
 		<div class="hero-unit">
-			<h1>크롤링테스트넷</h1>
+			<h1>200</h1>
 			<p>
-				자바 크롤링 연습사이트맨 <br>오로지 JSOUP만을 이용함 v100
+				200 WE CAN FIND THIS PAGE
 			</p>
 
 		</div>
@@ -177,9 +181,9 @@ tbody tr{
 				<div>
 					<form name="my_form">
 						<input type="checkbox" class="checkbox" name="box"
-							value="todayHumor" checked="checked" />오늘의유머 <br> <input
-							type="checkbox" class="checkbox" name="box" value="humorUniv"
-							checked="checked" />웃대
+							value="woowa" checked="checked" />우아한형제들 <br>
+						 <input type="checkbox" class="checkbox" name="box" value="line"
+							checked="checked" />라인
 					</form>
 				</div>
 				<p></p>
@@ -188,23 +192,25 @@ tbody tr{
 				</p>
 			</div>
 			<div class="span8">
-				<h2>베스트</h2>
+				<!-- <h2>베스트</h2>
 				<br />
 				<p>
 					<a href="#" class="btn btn-primary btn-small" onclick='prev();'>이전</a><a
 						href="#" class="btn btn-primary btn-small" onclick='next();'>다음</a>
 					<span class="label label-success" id="pageinfo">1234</span>
 				</p>
-				<!-- <div id="map1" class="grid"> -->
+				<div id="map1" class="grid"> -->
 
 				<table class="table table-hover">
 					<colgroup>
+						<col width="10%" />
 						<col width="60%" />
 						<col width="20%" />
-						<col width="20%" />
+						<col width="10%" />
 					</colgroup>
 					<thead>
 						<tr>
+							<th>상태</th>
 							<th>제목</th>
 							<th>등록자</th>
 							<th>등록</th>
