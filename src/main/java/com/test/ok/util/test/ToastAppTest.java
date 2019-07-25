@@ -72,14 +72,14 @@ public class ToastAppTest {
 		Elements writerInfo = doc.select("#post-list article[id^=post-] .article-inner h5.author-name .byline");
 		Elements summury = doc.select("#post-list article[id^=post-] .article-inner .entry-summary");
 		Elements url = doc.select("#post-list article[id^=post-] .article-inner a.more-link");
-		
+
 		List<CrData> list = new ArrayList<CrData>();
 		for (int i = 0; i < subjects.size(); i++) {
 			//String subject, String url, String name, String date, String hit, String ok
 			//System.out.println("---" + subjects.eq(i));
 			String writeDate = writerInfo.eq(i).text().replace("|", "").trim();
 			String[] writerInfox = writer.eq(i).text().trim().split("\\|");
-			
+
 //			System.out.println("title : " + title.eq(i).text());
 //			System.out.println("img :" + facImg.eq(i).attr("src"));
 //			System.out.println("img :" + writeDate);
@@ -88,8 +88,8 @@ public class ToastAppTest {
 			//System.out.println("writer : " +writerInfox[0] +"//" + writerInfox[1]  +"//" + writer.eq(i).text().trim());
 			//System.out.println("writer :" + writeDate[0] +"/" + writeDate[1] +"/" + writeDate[2]);
 			try {
-				DataUtil.checkStatus(writerInfox[1]);
-			} catch (ParseException e) {
+			//	DataUtil.checkStatus(writerInfox[1]);
+			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -101,7 +101,7 @@ public class ToastAppTest {
 					.url( URL + url.eq(i).attr("href"))
 					.type("TOAST")
 					.date(writerInfox[1]).build();
-					
+
 					;
 			list.add(crowl);
 
