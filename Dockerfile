@@ -5,4 +5,5 @@
 
 #for rpi 
 FROM  dordoka/rpi-tomcat
+RUN rm -rf /opt/tomcat/webapps/*
 copy target/*.war /opt/tomcat/webapps/ROOT.war
